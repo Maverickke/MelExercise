@@ -1,0 +1,14 @@
+/*Script 3) Write a script that based on selection will print how many objects / nodes the user
+	has selected.*/
+
+
+proc printObjects(){
+    //selected elements
+    string $objects[] = `ls -sl`;
+    string $nodes[] = `listRelatives -s $objects`;
+
+    //print number of selected items
+    print("\n" + "num selected: " + size($objects) + "\n" + "num nodes: " + size($nodes) + "\n");
+}
+
+printObjects();

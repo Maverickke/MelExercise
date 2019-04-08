@@ -1,0 +1,14 @@
+/*Script 4) 
+	Make a copy of the script above and modify the copy so that it now prints
+	how many joints are selected, how many meshes are selected and how many transforms
+	are selected.*/
+
+proc printTypeSelected(){
+    string $transform[] = `ls -sl -type "transform"`;
+    string $mesh[] = `ls -sl -type "mesh"`;
+    string $joint[] = `ls -sl -type "joint"`;
+
+    print("\n" + "num transform: " + size($transform) + "\n" + "num mesh: " + size($mesh)+ "\n" + "num joint: " + size($joint) + "\n");
+} 
+
+printTypeSelected();

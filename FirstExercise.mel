@@ -1,0 +1,44 @@
+/*Script 1) 
+Write a script that will create 3 polySpheres and 3 polyCubes.
+The 3 polySphere should be place 5 units from each other in X. but not moved in Y or Z.
+The 3 polyCubes should be on top of the spheres in the viewport (3 units above)
+The first cube should have a red lambert material assigned to it,
+The second cube should have a green lambert material assigned to it
+The third cube should have a blue blinn material assigned to it.
+Put comments in your code for documentation...*/
+
+proc spawnPoly()
+{
+    for ($i=0; $i<3; ++$i)
+    {    
+        //create polySphere and move
+        string $polySphere[] = `polySphere`;
+        move -x ($i*5); 
+        
+        //create polyCube and move
+        string $polyCube[] = `polyCube`;
+        move -xy ($i*5) 3;
+        
+        //create shader
+        string $surfaceShader;
+        if($i == 2){
+            $surfaceShader = `shadingNode -asShader blinn`;
+        }
+        else{
+            
+            $surfaceShader = `shadingNode -asShader lambert`;
+        }
+        
+        //create color
+        string $color = $surfaceShader + ".color";
+        int $indexColor[] = {0,0,0};
+        $indexColor[$i] = 1;
+        select $polyCube[0];
+        
+	    hyperShade -a $surfaceShader $polyCube[0];
+        setAttr $color -type float3 $indexColor[0] $indexColor[1] $indexColor[2];
+        
+    }
+}
+
+spawnPoly();
